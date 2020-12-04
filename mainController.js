@@ -18,5 +18,5 @@ const index = require('./controller/index.js');
 app.use('/', index);
 
 app.listen(65001, () => {
-	console.log('koreaCovidAPI running at 65001');
+	console.log('server running at 65001');
 });

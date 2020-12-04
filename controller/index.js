@@ -70,6 +70,7 @@ router.get('/', (request, response) => {
 
 router.get('/api', (request, response) => {
   client.query('SELECT * FROM CovidInfo order by day desc limit 1', (error, results) => {
+    console.log('request!');
     response.send(results);
   });
 });

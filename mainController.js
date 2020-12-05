@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 
-//app.use(express.static('View'));
 app.use(express.static('view'));
 
 

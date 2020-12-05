@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static('view'));
 
 
-const index = require('./controller/index.js');
+const index = require(__dirname + '/controller/index.js');
 const api = require(__dirname + '/controller/api/index.js');
 
 

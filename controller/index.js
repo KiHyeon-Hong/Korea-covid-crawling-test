@@ -48,7 +48,7 @@ router.get('/', (request, response) => {
     });
 
 
-
+    let urlData = fs.readFileSync(__dirname + '../files/webPage.txt', 'utf8');
 
     fs.readFile('./view/index.ejs', 'utf8', (error, data) => {
       response.send(ejs.render(data, {
@@ -62,7 +62,8 @@ router.get('/', (request, response) => {
         patientIn : patientIn,
         patientOut : patientOut,
         day : day,
-        patientPer: patientPer(patientNow, releaseNow)
+        patientPer: patientPer(patientNow, releaseNow),
+        urlData: urlData
       }));
     });
   });

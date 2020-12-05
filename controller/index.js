@@ -18,21 +18,10 @@ const patientPer = (patientNow, releaseNow) => {
 }
 
 
-
 router.get('/', (request, response) => {
-
   client.query('SELECT * FROM CovidInfo order by day desc limit 1', (error, results) => {
 
-    let patientNow;
-    let examinationNow;
-    let releaseNow;
-    let deathNow;
-    let patientAdd;
-    let examinationAdd;
-    let deathAdd;
-    let patientIn;
-    let patientOut;
-    let day;
+    let patientNow, examinationNow, releaseNow, deathNow, patientAdd, examinationAdd, deathAdd, patientIn, patientOut, day;
 
     results.forEach((item, i) => {
       patientNow = item.patientNow;
@@ -48,7 +37,7 @@ router.get('/', (request, response) => {
     });
 
 
-    let urlData = fs.readFileSync(__dirname + '../files/webPage.txt', 'utf8');
+    let urlData = fs.readFileSync(__dirname + '/../files/webPage.txt', 'utf8');
 
     fs.readFile('./view/index.ejs', 'utf8', (error, data) => {
       response.send(ejs.render(data, {
@@ -67,94 +56,6 @@ router.get('/', (request, response) => {
       }));
     });
   });
-});
-
-router.get('/api', (request, response) => {
-  client.query('SELECT * FROM CovidInfo order by day desc limit 1', (error, results) => {
-    console.log('request!');
-    response.send(results);
-  });
-});
-
-router.get('/patientNow', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.patientNow).toString());
-
-});
-
-router.get('/examinationNow', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.examinationNow).toString());
-});
-
-router.get('/releaseNow', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.releaseNow).toString());
-});
-
-router.get('/deathNow', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.deathNow).toString());
-});
-
-router.get('/patientAdd', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.patientAdd).toString());
-});
-
-router.get('/examinationAdd', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.examinationAdd).toString());
-});
-
-router.get('/releaseAdd', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.releaseAdd).toString());
-});
-
-router.get('/deathAdd', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.deathAdd).toString());
-});
-
-router.get('/patientIn', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.patientIn).toString());
-});
-
-router.get('/patientOut', (request, response) => {
-  let data = fs.readFileSync('files/covid.json', 'utf8');
-  data = data.replace( /'/gi, '"');
-  data = JSON.parse(data);
-
-  response.send((data.patientOut).toString());
 });
 
 module.exports = router;

@@ -1,22 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const ejs = require('ejs');
+//const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const request = require('request');
 
 const app = express();
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+
 //app.use(express.static('View'));
 app.use(express.static('view'));
 
+
 const index = require('./controller/index.js');
+const api = require(__dirname + '/controller/api/index.js');
+
 
 app.use('/', index);
+app.use('/api', api);
+
 
 app.listen(65001, () => {
 	request.get(
